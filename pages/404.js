@@ -1,0 +1,1 @@
+export default function Custom404(){ return <div style={{padding:40}}><h1>404 Not Found</h1><p>In the heat of day, the path dissolves to nothing — an empty mirage.</p><a href="/">Go home</a></div>;}

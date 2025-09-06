@@ -1,0 +1,5 @@
+import { useState,useEffect } from 'react';
+export default function VerifyPage(){ const [loading,setLoading]=useState(false); const [user,setUser]=useState(null);
+useEffect(()=>{ fetch('/api/auth/me').then(r=>r.json()).then(d=>setUser(d.user)); },[]);
+async function startVerification(){if(!user){alert('Please login first'); return;} setLoading(true); try{ const res=await fetch('/api/create-verification',{method:'POST'}); const data=await res.json(); if(data.url) window.location.href=data.url; else alert(data.error||'Failed'); }catch(err){console.error(err); alert('Error');} finally{setLoading(false);}}
+return(<div style={{padding:40}}><h1>Verify your identity</h1>{!user?(<p>Please <a href="/">login or register</a></p>):(<><p>Signed in as <strong>{user.email}</strong>. Verification status: <em>{user.verificationStatus}</em></p><button onClick={startVerification} disabled={loading}>{loading?'Starting...':'Continue to verification'}</button></>)}</div>);}
