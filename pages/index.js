@@ -99,7 +99,7 @@ export default function Home() {
               onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
             <div>
-              <button type="submit">Register</button>
+              <button type="button" onClick={register}>Register</button>
               <button type="button" onClick={login}>
                 Login
               </button>
